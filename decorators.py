@@ -12,11 +12,9 @@ def log(level: str = "INFO") -> Callable[[Callable[P, R]], Callable[P, R]]:
         def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
             print(f"The function/method '{fn.__name__}' started")
             print(f"{level=}")
-            try:
-                return fn(*args, **kwargs)
-            finally:
-                print(f"The function/method '{fn.__name__}' is completed")
-        
+            ret = fn(*args, **kwargs)
+            print(f"The function/method '{fn.__name__}' is completed")
+            return ret
         return wrapper
     return decorator
 
@@ -26,7 +24,3 @@ def do_something(name: str) -> None:
 
 
 do_something("Santo")
-
-
-
-

@@ -21,7 +21,7 @@ def log(level: str = "INFO") -> Callable[[Callable[P, R]], Callable[P, R]]:
     return decorator
 
 @log("DEBUG")
-def do_something(name: str):
+def do_something(name: str) -> None:
     print(f"Doing something with {name=}")
 
 

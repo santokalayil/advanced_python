@@ -42,20 +42,24 @@ if returned_out != dummy_out:
 Generator Type Hinting + how it works + how yield, send and return can be used
 to make sure full potential of python is being used
 """
-
-from typing import Generator, TypeAlias
+from typing import Generator, TypeAlias, Optional
 
 YieldType: TypeAlias = str
 SendType: TypeAlias = str
 ReturnType: TypeAlias = str
 
 def generator() -> Generator[YieldType, SendType, ReturnType]:
-    result1 = yield "santo"
+    # result1 can be Optional[str] because the very first `next(gen)`
+    # call sends `None` into the yield expressio
+    result1: Optional[str] = yield "santo"
     print(result1, "is yielded")
+
     result2: str = yield "sajan"
     print(result1, result2, "are yielded")
+
     result3: str = yield "saly"
     print(result1, result2, result3, "are yielded")
+    
     return "complete"
 
 gen = generator()
